@@ -11,7 +11,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int itr;
+	int itr, length = 0;
 	va_list list;
 
 	va_start(list, format);
@@ -22,33 +22,34 @@ int _printf(const char *format, ...)
 	{
 		if (format[itr] == '%')
 		{
+			
 			itr++;
 			if (format[itr] == 's')
 			{
 				char *chs = va_arg(list, char *);
 
-				puts(chs);
+				length += puts(chs);
 				itr++;
 			}
 			if (format[itr] == 'c')
 			{
 				int chc = va_arg(list, int);
 
-				putchar(chc);
+				length += putchar(chc);
 				itr++;
 			}
 			if (format[itr] == '%')
 			{
-				putchar(format[itr]);
+				length += putchar(format[itr]);
 				itr++;
 			}
 		}
 		else
 		{
-			putchar(format[itr]);
+			length += putchar(format[itr]);
 			itr++;
 		}
 	}
 	va_end(list);
-	return (0);
+	return (length);
 }
