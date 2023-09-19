@@ -9,6 +9,7 @@
  *
  * Return: length of string
  */
+int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
 	int itr, length = 0;
@@ -22,7 +23,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[itr] == '%')
 		{
-			
+
 			itr++;
 			if (format[itr] == 's')
 			{
@@ -30,8 +31,7 @@ int _printf(const char *format, ...)
 
 				while (*chs)
 				{
-					putchar(*chs);
-					length++;
+					length += putchar(*chs);
 					chs++;
 				}
 			}
@@ -39,19 +39,16 @@ int _printf(const char *format, ...)
 			{
 				int chc = va_arg(list, int);
 
-				putchar(chc);
-				length++;
+				length += putchar(chc);
 			}
 			else if (format[itr] == '%')
 			{
-				putchar('%');
-				length++;
+				length += putchar('%');
 			}
 		}
 		else
 		{
-			putchar(format[itr]);
-			length++;
+			length += putchar(format[itr]);
 		}
 		itr++;
 	}
