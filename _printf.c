@@ -31,7 +31,8 @@ int _printf(const char *format, ...)
 
 				while (*chs)
 				{
-					length += putchar(*chs);
+					putchar(*chs);
+					length++;
 					chs++;
 				}
 			}
@@ -39,16 +40,19 @@ int _printf(const char *format, ...)
 			{
 				int chc = va_arg(list, int);
 
-				length += putchar(chc);
+				putchar(chc);
+				length++;
 			}
 			else if (format[itr] == '%')
 			{
-				length += putchar('%');
+				putchar('%');
+				length++;
 			}
 		}
 		else
 		{
-			length += putchar(format[itr]);
+			 putchar(format[itr]);
+			 length++;
 		}
 		itr++;
 	}
