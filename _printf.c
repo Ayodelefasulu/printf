@@ -7,7 +7,7 @@
  * @format: this is the format string
  * @...: ellipses
  *
- * Return: returns zero for now
+ * Return: length of string
  */
 int _printf(const char *format, ...)
 {
@@ -28,27 +28,32 @@ int _printf(const char *format, ...)
 			{
 				char *chs = va_arg(list, char *);
 
-				length += puts(chs);
-				itr++;
+				while (*chs)
+				{
+					putchar(*chs);
+					length++;
+					chs++;
+				}
 			}
-			if (format[itr] == 'c')
+			else if (format[itr] == 'c')
 			{
 				int chc = va_arg(list, int);
 
-				length += putchar(chc);
-				itr++;
+				putchar(chc);
+				length++;
 			}
-			if (format[itr] == '%')
+			else if (format[itr] == '%')
 			{
-				length += putchar(format[itr]);
-				itr++;
+				putchar('%');
+				length++;
 			}
 		}
 		else
 		{
-			length += putchar(format[itr]);
-			itr++;
+			putchar(format[itr]);
+			length++;
 		}
+		itr++;
 	}
 	va_end(list);
 	return (length);
