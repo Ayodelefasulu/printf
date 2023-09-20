@@ -12,11 +12,14 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int itr, length = 0;
+	int itr;
+	int length;
+	/* int flength; */
 	va_list list;
 
 	va_start(list, format);
 	itr = 0;
+	length = 0;
 	if (format == NULL)
 		return (-1);
 	while (format[itr] != '\0')
@@ -57,5 +60,7 @@ int _printf(const char *format, ...)
 		itr++;
 	}
 	va_end(list);
+
+	/* flength = _strlen(format); */
 	return (length);
 }
