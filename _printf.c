@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 {
 	int itr;
 	int length;
-	/* int flength; */
+	/* int j; */
 	va_list list;
 
 	va_start(list, format);
@@ -34,8 +34,7 @@ int _printf(const char *format, ...)
 
 				while (*chs)
 				{
-					putchar(*chs);
-					length++;
+					length += putchar(*chs);
 					chs++;
 				}
 			}
@@ -43,24 +42,37 @@ int _printf(const char *format, ...)
 			{
 				int chc = va_arg(list, int);
 
-				putchar(chc);
-				length++;
+				length += putchar(chc);
 			}
 			else if (format[itr] == '%')
 			{
-				putchar('%');
-				length++;
+				length += putchar('%');
+			}
+			else if (format[itr] == 'd')
+			{
+				int chd = va_arg(list, int);
+				char buffer[12];
+
+				sprintf(buffer, "%d", chd);
+				_printf("%s", buffer);
+				/* write(1, buffer, _strlen(buffer)); */
+			}
+			else if (format[itr] == 'i')
+			{
+				int chi = va_arg(list, int);
+				char buffer[20];
+
+				sprintf(buffer, "%i", chi);
+				_printf("%s", buffer);
+				/* write(1, buffer, _strlen(buffer)); */
 			}
 		}
 		else
 		{
-			 putchar(format[itr]);
-			 length++;
+			length += putchar(format[itr]);
 		}
 		itr++;
 	}
 	va_end(list);
-
-	/* flength = _strlen(format); */
 	return (length);
 }
