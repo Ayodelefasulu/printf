@@ -47,6 +47,7 @@ int _printf(const char *format, ...)
 			else if (format[itr] == '%')
 			{
 				length += putchar('%');
+<<<<<<< HEAD
 			}
 			else if (format[itr] == 'd')
 			{
@@ -65,6 +66,8 @@ int _printf(const char *format, ...)
 				sprintf(buffer, "%i", chi);
 				_printf("%s", buffer);
 				/* write(1, buffer, _strlen(buffer)); */
+=======
+>>>>>>> parent of 9cc7a97... task 0
 			}
 		}
 		else
