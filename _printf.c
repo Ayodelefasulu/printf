@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdarg.h>
 #include "main.h"
 #include <unistd.h>
@@ -14,7 +15,7 @@ int _printf(const char *format, ...)
 {
 	int itr;
 	int length;
-	/* int j; */
+	int j;
 	va_list list;
 
 	va_start(list, format);
@@ -42,12 +43,13 @@ int _printf(const char *format, ...)
 			{
 				int chc = va_arg(list, int);
 
-				length += putchar(chc);
+				putchar(chc);
+				length++;
 			}
 			else if (format[itr] == '%')
 			{
-				length += putchar('%');
-<<<<<<< HEAD
+				putchar('%');
+				length++;
 			}
 			else if (format[itr] == 'd')
 			{
@@ -55,8 +57,7 @@ int _printf(const char *format, ...)
 				char buffer[12];
 
 				sprintf(buffer, "%d", chd);
-				_printf("%s", buffer);
-				/* write(1, buffer, _strlen(buffer)); */
+				puts(buffer);
 			}
 			else if (format[itr] == 'i')
 			{
@@ -64,15 +65,18 @@ int _printf(const char *format, ...)
 				char buffer[20];
 
 				sprintf(buffer, "%i", chi);
-				_printf("%s", buffer);
-				/* write(1, buffer, _strlen(buffer)); */
-=======
->>>>>>> parent of 9cc7a97... task 0
+
+				for (j = 0; buffer[j] != '\0'; j++)
+				{
+					putchar(buffer[j]);
+					length++;
+				}
 			}
 		}
 		else
 		{
-			length += putchar(format[itr]);
+			putchar(format[itr]);
+			length++;
 		}
 		itr++;
 	}
