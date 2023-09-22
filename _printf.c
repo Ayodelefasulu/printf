@@ -72,6 +72,21 @@ int _printf(const char *format, ...)
 					length++;
 				}
 			}
+			else if (format[itr] == 'b')
+			{
+				unsigned int chb = va_arg(list, unsigned int);
+				char buffer[32];
+				int i;
+
+				for (i = 31; i >= 0; i--)
+				{
+					buffer[1] = (chb & 1) ? '1' : '0';
+					chb >>= 1;
+				}
+
+				length += puts(buffer);
+			}
+
 		}
 		else
 		{
